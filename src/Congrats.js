@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const Congrats = props => {
   const message = props.success ? "You WON!!!" : "";
@@ -7,4 +8,8 @@ export const Congrats = props => {
       <p className="message">{message}</p>
     </div>
   );
+};
+
+Congrats.propTypes = {
+  success: PropTypes.bool.isRequired
 };
