@@ -1,9 +1,10 @@
 import React from "react";
 
-export const Congrats = () => {
+export const Congrats = props => {
+  const message = props.success ? "You WON!!!" : "";
   return (
-    <div>
-      <p>of course!</p>
+    <div data-test="component-congrats">
+      <p className="message">{message}</p>
     </div>
   );
 };
