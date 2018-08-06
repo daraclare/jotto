@@ -1,12 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
 import { findByTestAttr } from "../config/jest/jestUtils";
 import { propError } from "../config/jest/jestUtils";
 import { Congrats } from "./Congrats";
-
-configure({ adapter: new Adapter() });
 
 const setup = (props = {}, state = null) => {
   const initialProps = { ...defaultProps, ...props };
