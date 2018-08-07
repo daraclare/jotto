@@ -1,3 +1,10 @@
-export default () => {
-  return null;
+import { actionTypes } from "../actions/index";
+
+export default (state, action) => {
+  switch (action.type) {
+    case actionTypes.CORRECT_GUESS:
+      return true;
+    default:
+      return false;
+  }
 };
