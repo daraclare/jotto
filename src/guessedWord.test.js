@@ -12,7 +12,7 @@ const defaultProps = {
   ]
 };
 
-const setup = (props = {}, state = null) => {
+const setup = (props = {}) => {
   const initialProps = { ...defaultProps, ...props };
   const wrapper = shallow(<GuessedWord {...initialProps} />);
   return wrapper;
@@ -74,5 +74,14 @@ describe("GuessWord Component with multiple guessedWords in props", () => {
   it("should render all guessed words", () => {
     const matchedLetterNodes = wrapper.find(".matchedLetters").getElements();
     expect(matchedLetterNodes).toHaveLength(guessedWords.length);
+  });
+
+  it("should render the correct matchedLetter for first guess", () => {
+    const matchedLetter = wrapper
+      .find(".matchedLetters")
+      .at(0)
+      .text();
+    const letterCount = guessedWords[0].letterMatchCount;
+    expect(matchedLetter).toBe(`${letterCount}`);
   });
 });
