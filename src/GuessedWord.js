@@ -6,11 +6,19 @@ export const GuessedWord = props => {
     props.guessedWords.length === 0 ? (
       <p className="instructions">Please guess a word</p>
     ) : (
-      <p>my words</p>
+      props.guessedWords.map((item, index) => {
+        return (
+          <div key={index}>
+            <p className="guessedWord">
+              {item.guessedWord}{" "}
+              <span className="matchedLetters">{item.letterMatchCount}</span>{" "}
+            </p>
+          </div>
+        );
+      })
     );
   return (
     <div data-test="component-guessedword">
-      {console.log("props.guessword", props.guessedWords)}
       {context}
       <h1>Hi there</h1>
       <p>So what</p>

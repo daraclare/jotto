@@ -18,9 +18,12 @@ const setup = (props = {}, state = null) => {
   return wrapper;
 };
 
-describe("GuessedWord Component", () => {
+describe("GuessedWord Component with guesswords props", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = setup();
+  });
   it("should render without errors", () => {
-    const wrapper = setup();
     const dataAtt = findByTestAttr(wrapper, "component-guessedword");
     expect(dataAtt).toHaveLength(1);
   });
@@ -29,12 +32,10 @@ describe("GuessedWord Component", () => {
     propError(GuessedWord, defaultProps);
   });
 
-  //   it("should render instructions when no words are guessed", () => {
-  //     const testProps = { guessedWords: [] };
-  //     const wrapper = setup({ guessedWords: [] });
-  //     const instructions = wrapper.find(".instructions").text();
-  //     expect(instructions).toBe("Please guess a word");
-  //   });
+  it("should render a guessed word, not instructions", () => {
+    const guessedWord = wrapper.find(".guessedWord").text();
+    expect(guessedWord).toBeDefined();
+  });
 });
 
 describe("GuessWord Component with empty props", () => {
@@ -43,8 +44,35 @@ describe("GuessWord Component with empty props", () => {
     wrapper = setup({ guessedWords: [] });
   });
 
-  it("should render instructions", () => {
+  it("should render instructions, not a word list", () => {
     const instructions = wrapper.find(".instructions").text();
     expect(instructions).toBe("Please guess a word");
+  });
+});
+
+describe("GuessWord Component with multiple guessedWords in props", () => {
+  let wrapper;
+  const guessedWords = [
+    {
+      guessedWord: "train",
+      letterMatchCount: 3
+    },
+    {
+      guessedWord: "agile",
+      letterMatchCount: 1
+    },
+    {
+      guessedWord: "party",
+      letterMatchCount: 5
+    }
+  ];
+
+  beforeEach(() => {
+    wrapper = setup({ guessedWords });
+  });
+
+  it("should render all guessed words", () => {
+    const matchedLetterNodes = wrapper.find(".matchedLetters").getElements();
+    expect(matchedLetterNodes).toHaveLength(guessedWords.length);
   });
 });
